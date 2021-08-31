@@ -13,7 +13,7 @@ let menuIsActive = false;
 // Function that repairs onload burger animation
 setTimeout(() => {
   burgerLines.forEach(el => el.classList.add('burger__transition'));
-}, 1000)
+}, 1000);
 
 burger.addEventListener("click", () => {
   if (menuIsActive) {
