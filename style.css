@@ -30,6 +30,13 @@ button {
           transform: translateY(0%) !important;
 }
 
+.burger__transition {
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+
 .button {
   padding: 0.5rem 1rem;
   height: 3rem;
@@ -382,10 +389,18 @@ button {
   width: 100%;
   background-color: #1975d1;
   border-radius: 20px;
-  -webkit-transition: opacity 0.5s ease-in-out, -webkit-transform 0.7s ease-in-out;
-  transition: opacity 0.5s ease-in-out, -webkit-transform 0.7s ease-in-out;
-  transition: opacity 0.5s ease-in-out, transform 0.7s ease-in-out;
-  transition: opacity 0.5s ease-in-out, transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
+}
+
+.navbar .burger .line__one {
+  visibility: hidden;
+}
+
+.navbar .burger .line__two {
+  visibility: hidden;
+}
+
+.navbar .burger .line__three {
+  visibility: hidden;
 }
 
 /* MAIN SECTION */
@@ -1930,6 +1945,15 @@ button {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+  }
+  .navbar .burger .line__one {
+    visibility: hidden;
+  }
+  .navbar .burger .line__two {
+    visibility: hidden;
+  }
+  .navbar .burger .line__three {
+    visibility: hidden;
   }
   .section .services__features__container {
     max-width: 100vw;

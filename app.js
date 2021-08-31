@@ -10,6 +10,11 @@ const mobileScreen = 699;
 
 let menuIsActive = false;
 
+// Function that repairs onload burger animation
+setTimeout(() => {
+  burgerLines.forEach(el => el.classList.add('burger__transition'));
+}, 1000)
+
 burger.addEventListener("click", () => {
   if (menuIsActive) {
     // Menu is activated
@@ -439,11 +444,19 @@ document.addEventListener("scroll", () => {
 
 //MAIN ANIMATIONS
 const mainTl = gsap.timeline({
-  delay: 2,
+  delay: 1.5,
 });
 
 gsap.set(
-  ".header__title, .header__subtitle, .header__button, .navbar, .info__bar",
+  `.header__title,
+   .header__subtitle,
+   .header__button,
+   .navbar, 
+   .info__bar,
+   .line__one,
+   .line__two,
+   .line__three
+   `,
   {
     visibility: "visible",
   }
@@ -464,48 +477,93 @@ mainTl
     ease: "power4. out",
   });
 
-  navLinks.forEach((el) => {
-    mainTl.from(el, {
-      duration: 0.45,
-      y: 50,
-      opacity: 0,
-      ease: "power4. out",
+  if(screenWidth > mobileScreen){
+
+    //Animations for big screens
+    navLinks.forEach((el) => {
+      mainTl.from(el, {
+        duration: 0.45,
+        y: 50,
+        opacity: 0,
+        ease: "power4. out",
+      });
     });
-  });
 
+    mainTl
+      .fromTo(underlines[0], {
+        duration: 0.5,
+        width: 0,
+        ease: "power4. out"
+      }, {
+        width: '100%'
+      })
+      .to(navLinks[0], {
+        color: '#f85c5b'
+      })
+      .from(".header__subtitle", {
+        duration: 0.7,
+        y: 50,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=5')
+      .from(".header__button", {
+        duration: 0.7,
+        width: 0,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=4.3')
+      .from([headerButtonChilds[0], headerButtonChilds[1]], {
+        duration: 1,
+        x: -20,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=3.5');
 
-mainTl
-  .fromTo(underlines[0], {
-    duration: 0.5,
-    width: 0,
-    ease: "power4. out"
-  }, {
-    width: '100%'
-  })
-  .to(navLinks[0], {
-    color: '#f85c5b'
-  })
-  .from(".header__subtitle", {
-    duration: 0.7,
-    y: 50,
-    opacity: 0,
-    ease: "power4. out",
-  }, '-=5')
-  .from(".header__button", {
-    duration: 0.7,
-    width: 0,
-    opacity: 0,
-    ease: "power4. out",
-  }, '-=4.3')
-  .from([headerButtonChilds[0], headerButtonChilds[1]], {
-    duration: 1,
-    x: -20,
-    opacity: 0,
-    ease: "power4. out",
-  }, '-=4')
-  .from('body', {
-    overflowY: 'hidden'
-  });
+  } else {
+
+    ////Animations for mobile screens
+    mainTl
+      .from(".header__subtitle", {
+        duration: 0.7,
+        y: 50,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=0.8')
+      .from(burgerLines[0], {
+        duration: 0.1,
+        opacity: 0,
+        x: -30,
+        ease: "power4. out",
+      }, '-=.5')
+      .from(burgerLines[1], {
+        duration: 0.1,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=.5')
+      .from(burgerLines[2], {
+        duration: 0.1,
+        opacity: 0,
+        x: 30,
+        ease: "power4. out",
+      }, '-=.5')
+      .from(".header__button", {
+        duration: 0.7,
+        width: 0,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=0.3')
+      .from([headerButtonChilds[0], headerButtonChilds[1]], {
+        duration: 1,
+        x: -20,
+        opacity: 0,
+        ease: "power4. out",
+      }, '-=0');
+  }
+
+  mainTl
+    .from('body', {
+      overflowY: 'hidden'
+    });
 
 
 //Animations for titles and subtitles
